@@ -25,7 +25,9 @@ Update this when adding new assets — keeps jam submissions clean.
 
 | Asset | Author | License | Source |
 |-------|--------|---------|--------|
-| (none yet) | — | — | — |
+| 1-Bit Pack | Kenney | CC0 (Public Domain) | [kenney.nl](https://kenney.nl/assets/1-bit-pack) |
+
+**Tilesheet info:** 16×16px tiles, 1px spacing, 1078 tiles total
 
 ---
 
@@ -52,4 +54,5 @@ Paste this in your itch.io description or credits screen:
 ```
 Font: m5x7 by Daniel Linssen (https://managore.itch.io/m5x7)
 UI: Kenney Pixel UI Pack (https://kenney.nl)
+Sprites: Kenney 1-Bit Pack (https://kenney.nl/assets/1-bit-pack)
 ```
