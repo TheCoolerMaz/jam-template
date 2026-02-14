@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jamtemplate.JamGame;
 import com.jamtemplate.screens.transitions.FadeTransition;
+import com.jamtemplate.ui.KeyboardNav;
 
 /**
  * Main menu screen.
@@ -65,6 +66,11 @@ public class MenuScreen extends GameScreen {
             }
         });
         root.add(quitBtn).width(200).height(50);
+        
+        // Enable keyboard navigation
+        KeyboardNav nav = new KeyboardNav(stage);
+        nav.add(playBtn, settingsBtn, quitBtn);
+        nav.setFocus(0);
     }
 
     @Override

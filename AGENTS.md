@@ -2,6 +2,29 @@
 
 This is a LibGDX game jam template. Use it to rapidly prototype games.
 
+## Running & Input Injection
+
+Launch the game (with display access):
+```bash
+WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 ./gradlew lwjgl3:run
+```
+
+Send keyboard input to running app (requires `wtype`):
+```bash
+wtype -k Return    # Enter key
+wtype -k Escape    # Escape
+wtype -k Tab       # Tab (next focus)
+wtype -M shift -k Tab  # Shift+Tab (previous)
+wtype -k Up        # Up arrow
+wtype -k Down      # Down arrow
+wtype -k space     # Space (activate)
+```
+
+UI is fully keyboard navigable:
+- Tab / Up / Down = cycle focus
+- Enter / Space = activate button
+- Escape = back (on most screens)
+
 ## Project Structure
 
 ```
