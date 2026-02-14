@@ -32,12 +32,14 @@ public class Assets implements Disposable {
 
     /** Queue all game assets for loading. */
     public void loadAll() {
-        // UI
+        // UI Skin
         if (Gdx.files.internal("ui/skin.json").exists()) {
             manager.load("ui/skin.json", Skin.class);
         }
-        if (Gdx.files.internal("ui/font.fnt").exists()) {
-            manager.load("ui/font.fnt", BitmapFont.class);
+        
+        // Font (standalone, skin also includes one)
+        if (Gdx.files.internal("fonts/pixel.fnt").exists()) {
+            manager.load("fonts/pixel.fnt", BitmapFont.class);
         }
         
         // Sprites
@@ -72,8 +74,8 @@ public class Assets implements Disposable {
         if (manager.isLoaded("ui/skin.json")) {
             skin = manager.get("ui/skin.json", Skin.class);
         }
-        if (manager.isLoaded("ui/font.fnt")) {
-            font = manager.get("ui/font.fnt", BitmapFont.class);
+        if (manager.isLoaded("fonts/pixel.fnt")) {
+            font = manager.get("fonts/pixel.fnt", BitmapFont.class);
         }
     }
 

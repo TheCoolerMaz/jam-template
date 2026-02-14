@@ -1,11 +1,13 @@
 package com.jamtemplate.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.jamtemplate.screens.transitions.FadeTransition;
 
 /**
  * Simple splash/loading screen.
@@ -57,10 +59,9 @@ public class SplashScreen extends GameScreen {
         font.draw(batch, "Press any key to continue", centerX - 80, centerY - 110);
         batch.end();
         
-        // Transition on key press (after brief delay)
-        if (elapsed > 0.5f && Gdx.input.justTouched()) {
-            // manager.swap(new MenuScreen(), new FadeTransition());
-            Gdx.app.log("SplashScreen", "Would transition to menu here");
+        // Transition on key press or click (after brief delay)
+        if (elapsed > 0.5f && (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))) {
+            manager.swap(new MenuScreen(), new FadeTransition());
         }
     }
 
