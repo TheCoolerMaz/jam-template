@@ -18,7 +18,7 @@ public class GwtLauncher extends GwtApplication {
         GwtApplicationConfiguration config = new GwtApplicationConfiguration(true);
         config.padVertical = 0;
         config.padHorizontal = 0;
-        config.fullscreenOrientation = GwtApplicationConfiguration.OrientationLockType.LANDSCAPE;
+        // Orientation lock removed - not supported in all GWT backend versions
         return config;
     }
 
