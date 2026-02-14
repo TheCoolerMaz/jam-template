@@ -25,9 +25,22 @@ Update this when adding new assets — keeps jam submissions clean.
 
 | Asset | Author | License | Source |
 |-------|--------|---------|--------|
-| 1-Bit Pack | Kenney | CC0 (Public Domain) | [kenney.nl](https://kenney.nl/assets/1-bit-pack) |
+| 1-Bit Pack | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/1-bit-pack) |
+| Cursor Pack | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/cursor-pack) |
+| UI Pack | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/ui-pack) |
+| Input Prompts | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/input-prompts) |
+| Fantasy UI Borders | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/fantasy-ui-borders) |
+| Crosshair Pack | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/crosshair-pack) |
+| Scribble Dungeons | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/scribble-dungeons) |
+| Scribble Platformer | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/scribble-platformer) |
+| Isometric Blocks | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/isometric-blocks) |
+| Isometric Miniature Bases | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/isometric-miniature-bases) |
+| Isometric Miniature Dungeon | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/isometric-miniature-dungeon) |
+| Isometric Miniature Farm | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/isometric-miniature-farm) |
+| Isometric Miniature Library | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/isometric-miniature-library) |
+| Isometric Miniature Prototype | Kenney | CC0 | [kenney.nl](https://kenney.nl/assets/isometric-miniature-prototype) |
 
-**Tilesheet info:** 16×16px tiles, 1px spacing, 1078 tiles total
+All Kenney assets are CC0 (Public Domain) — free for any use, no attribution required.
 
 ---
 
@@ -53,6 +66,5 @@ Paste this in your itch.io description or credits screen:
 
 ```
 Font: m5x7 by Daniel Linssen (https://managore.itch.io/m5x7)
-UI: Kenney Pixel UI Pack (https://kenney.nl)
-Sprites: Kenney 1-Bit Pack (https://kenney.nl/assets/1-bit-pack)
+Assets: Kenney (https://kenney.nl) — CC0 Public Domain
 ```
