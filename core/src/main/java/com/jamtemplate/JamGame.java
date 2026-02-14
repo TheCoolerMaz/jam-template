@@ -45,6 +45,9 @@ public class JamGame extends Game {
 
     @Override
     public void render() {
+        // Guard against early render calls
+        if (screens == null || shaders == null) return;
+        
         // Clear screen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -67,14 +70,14 @@ public class JamGame extends Game {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        shaders.resize(width, height);
-        screens.resize(width, height);
+        if (shaders != null) shaders.resize(width, height);
+        if (screens != null) screens.resize(width, height);
     }
 
     @Override
     public void dispose() {
-        screens.dispose();
-        shaders.dispose();
-        assets.dispose();
+        if (screens != null) screens.dispose();
+        if (shaders != null) shaders.dispose();
+        if (assets != null) assets.dispose();
     }
 }
