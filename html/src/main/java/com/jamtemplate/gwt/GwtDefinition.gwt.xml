@@ -4,6 +4,10 @@
     <inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' />
     <inherits name='com.badlogic.ashley_gwt' />
     <inherits name='JamTemplate' />
+
+    <replace-with class="com.jamtemplate.graphics.GwtShaderPipelineFactory">
+        <when-type-is class="com.jamtemplate.graphics.IShaderPipelineFactory" />
+    </replace-with>
     <source path="" />
     <entry-point class='com.jamtemplate.gwt.GwtLauncher' />
     <set-configuration-property name="gdx.assetpath" value="../assets" />

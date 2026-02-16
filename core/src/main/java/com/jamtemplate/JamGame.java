@@ -1,6 +1,5 @@
 package com.jamtemplate;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,49 +7,56 @@ import com.badlogic.gdx.graphics.GL20;
 import com.jamtemplate.assets.Assets;
 import com.jamtemplate.audio.MusicEngine;
 import com.jamtemplate.audio.MusicPatterns;
-import com.jamtemplate.graphics.ShaderPipeline;
+import com.jamtemplate.graphics.IShaderPipeline;
 import com.jamtemplate.screens.ScreenManager;
 import com.jamtemplate.screens.SplashScreen;
 import com.jamtemplate.util.Prefs;
 
 /**
  * Main game entry point.
- * 
+ *
  * Initializes core systems and manages the game lifecycle.
  */
 public class JamGame extends Game {
 
     public static JamGame INSTANCE;
-    
+
     public Assets assets;
     public ScreenManager screens;
-    public ShaderPipeline shaders;
+    public IShaderPipeline shaders;
     public Prefs prefs;
     private MusicEngine musicEngine;
 
     public JamGame() {
-        this(null);
+        this(null, null); // Pass null for shaders, will be handled by platform specific launcher
     }
 
     public JamGame(MusicEngine musicEngine) {
+        this(musicEngine, null); // Pass null for shaders
+    }
+
+    public JamGame(MusicEngine musicEngine, IShaderPipeline shaders) {
         this.musicEngine = musicEngine;
+        this.shaders = shaders;
     }
 
     @Override
     public void create() {
         INSTANCE = this;
-        
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        
+
+        Gdx.app.setLogLevel(Gdx.app.LOG_DEBUG); // Fix: use Gdx.app.LOG_DEBUG
+
         // Initialize core systems
         prefs = new Prefs();
         assets = new Assets();
         assets.loadAll();
         assets.finishLoading();
-        
-        shaders = new ShaderPipeline();
-        shaders.rebuildFromPrefs(prefs);
-        
+
+        // Shader pipeline is passed in constructor now
+        if (shaders != null) { // Only rebuild if shaders are provided
+            shaders.rebuildFromPrefs(prefs);
+        }
+
         screens = new ScreenManager(this);
         screens.push(new SplashScreen());
 
@@ -62,22 +68,22 @@ public class JamGame extends Game {
     @Override
     public void render() {
         // Guard against early render calls
-        if (screens == null || shaders == null) return;
-        
+        if (screens == null) return; // shaders can be null if not provided
+
         // Clear screen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        // Render through shader pipeline
-        if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+
+        // Render through shader pipeline if available
+        if (shaders != null) {
             shaders.begin();
         }
-        
+
         // Update and render screens
         screens.update(Gdx.graphics.getDeltaTime());
         super.render();
-        
-        if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+
+        if (shaders != null) {
             shaders.end();
             shaders.render();
         }

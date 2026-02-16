@@ -5,10 +5,11 @@ import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 import com.jamtemplate.JamGame;
 import com.jamtemplate.audio.MusicEngine;
+import com.jamtemplate.graphics.GwtShaderPipeline;
 
 /**
  * WebGL/GWT launcher.
- * 
+ *
  * Build with: ./gradlew html:dist
  * Output in: html/build/dist/
  */
@@ -26,6 +27,6 @@ public class GwtLauncher extends GwtApplication {
     @Override
     public ApplicationListener createApplicationListener() {
         MusicEngine musicEngine = new GwtMusicEngine();
-        return new JamGame(musicEngine);
+        return new JamGame(musicEngine, new GwtShaderPipeline());
     }
 }

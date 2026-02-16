@@ -1,8 +1,9 @@
-package com.jamtemplate.graphics;
+package com.jamtemplate.lwjgl3.graphics;
+
+import com.jamtemplate.graphics.IShaderPipeline;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Disposable;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.BloomEffect;
 import com.crashinvaders.vfx.effects.VignettingEffect;
@@ -23,7 +24,7 @@ import com.jamtemplate.util.Prefs;
  *   shaders.end();
  *   shaders.render();
  */
-public class ShaderPipeline implements Disposable {
+public class ShaderPipeline implements IShaderPipeline {
 
     private final VfxManager vfx;
     private final Array<Effect> customEffects = new Array<>();
@@ -33,8 +34,14 @@ public class ShaderPipeline implements Disposable {
     }
 
     /** Rebuild effects based on current preferences. */
+    @Override
     public void rebuildFromPrefs(Prefs prefs) {
-        clear();
+        // clear();
+        vfx.removeAllEffects();
+        for (Effect effect : customEffects) {
+            effect.dispose();
+        }
+        customEffects.clear();
         
         // Bloom
         if (prefs.isBloomEnabled()) {
@@ -69,6 +76,7 @@ public class ShaderPipeline implements Disposable {
     }
 
     /** Clear all effects. */
+    @Override
     public void clear() {
         vfx.removeAllEffects();
         for (Effect effect : customEffects) {
@@ -78,22 +86,26 @@ public class ShaderPipeline implements Disposable {
     }
 
     /** Begin capturing render output. */
+    @Override
     public void begin() {
         vfx.cleanUpBuffers();
         vfx.beginInputCapture();
     }
 
     /** End capturing render output. */
+    @Override
     public void end() {
         vfx.endInputCapture();
     }
 
     /** Apply effects and render to screen. */
+    @Override
     public void render() {
         vfx.applyEffects();
         vfx.renderToScreen();
     }
 
+    @Override
     public void resize(int width, int height) {
         vfx.resize(width, height);
     }

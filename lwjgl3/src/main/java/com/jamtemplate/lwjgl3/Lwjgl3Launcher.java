@@ -3,10 +3,11 @@ package com.jamtemplate.lwjgl3;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.jamtemplate.JamGame;
+import com.jamtemplate.lwjgl3.graphics.ShaderPipeline;
 
 /**
  * Desktop launcher.
- * 
+ *
  * Run with: ./gradlew lwjgl3:run
  * Build JAR: ./gradlew lwjgl3:jar
  */
@@ -17,20 +18,20 @@ public class Lwjgl3Launcher {
     }
 
     private static void createApplication() {
-        new Lwjgl3Application(new JamGame(), getConfiguration());
+        new Lwjgl3Application(new JamGame(null, new ShaderPipeline()), getConfiguration());
     }
 
     private static Lwjgl3ApplicationConfiguration getConfiguration() {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        
+
         config.setTitle("Jam Template");
         config.setWindowedMode(1280, 720);
         config.useVsync(true);
         config.setForegroundFPS(60);
-        
+
         // Window icon (add your icon to assets/)
         // config.setWindowIcon("icon128.png", "icon64.png", "icon32.png", "icon16.png");
-        
+
         return config;
     }
 }
