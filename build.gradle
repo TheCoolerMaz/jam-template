@@ -3,6 +3,10 @@ buildscript {
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         google()
+        gradlePluginPortal() // Use the official plugin portal
+    }
+    dependencies {
+        classpath "org.docstr.gwt:org.docstr.gwt.gradle.plugin:1.1.31" // Correct plugin artifact and potentially compatible version
     }
 }
 
@@ -80,6 +84,24 @@ project(':lwjgl3') {
 project(':html') {
     apply plugin: 'java'
     apply plugin: 'war'
+    apply plugin: 'org.docstr.gwt'
+
+    gwt {
+        gwtVersion='2.10.0'
+        modules 'com.jamtemplate.gwt.GwtDefinition'
+        dev {
+            jvmArgs = ['-Xmx4G', '-Xms1G']
+        }
+    }
+
+    tasks.named('gwtDev') {
+        doFirst {
+            forkOptions {
+                maxHeapSize = '4G'
+                minHeapSize = '1G'
+            }
+        }
+    }
 
     java {
         sourceCompatibility = JavaVersion.VERSION_11
