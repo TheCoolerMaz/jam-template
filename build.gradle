@@ -87,20 +87,10 @@ project(':html') {
     apply plugin: 'org.docstr.gwt'
 
     gwt {
-        gwtVersion='2.10.0'
+        gwtVersion = '2.10.0'
         modules 'com.jamtemplate.gwt.GwtDefinition'
-        dev {
-            jvmArgs = ['-Xmx4G', '-Xms1G']
-        }
-    }
-
-    tasks.named('gwtDev') {
-        doFirst {
-            forkOptions {
-                maxHeapSize = '4G'
-                minHeapSize = '1G'
-            }
-        }
+        minHeapSize = '512M'
+        maxHeapSize = '2G'
     }
 
     java {
@@ -108,7 +98,7 @@ project(':html') {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    sourceSets.main.java.srcDirs = ['src/main/java']
+    sourceSets.main.java.srcDirs = ['src/main/java', '../core/src/main/java']
 
     dependencies {
         implementation project(':core')

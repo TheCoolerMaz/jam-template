@@ -28,6 +28,10 @@ public class JamGame extends Game {
     public Prefs prefs;
     private MusicEngine musicEngine;
 
+    public JamGame() {
+        this(null);
+    }
+
     public JamGame(MusicEngine musicEngine) {
         this.musicEngine = musicEngine;
     }
@@ -50,7 +54,9 @@ public class JamGame extends Game {
         screens = new ScreenManager(this);
         screens.push(new SplashScreen());
 
-        musicEngine.init();
+        if (musicEngine != null) {
+            musicEngine.init();
+        }
     }
 
     @Override
