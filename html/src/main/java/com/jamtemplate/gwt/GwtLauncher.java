@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 import com.jamtemplate.JamGame;
+import com.jamtemplate.audio.MusicEngine;
 
 /**
  * WebGL/GWT launcher.
@@ -24,6 +25,7 @@ public class GwtLauncher extends GwtApplication {
 
     @Override
     public ApplicationListener createApplicationListener() {
-        return new JamGame();
+        MusicEngine musicEngine = new GwtMusicEngine();
+        return new JamGame(musicEngine);
     }
 }

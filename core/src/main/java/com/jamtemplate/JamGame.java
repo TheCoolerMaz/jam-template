@@ -3,8 +3,11 @@ package com.jamtemplate;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.jamtemplate.assets.Assets;
+import com.jamtemplate.audio.MusicEngine;
+import com.jamtemplate.audio.MusicPatterns;
 import com.jamtemplate.graphics.ShaderPipeline;
 import com.jamtemplate.screens.ScreenManager;
 import com.jamtemplate.screens.SplashScreen;
@@ -23,6 +26,11 @@ public class JamGame extends Game {
     public ScreenManager screens;
     public ShaderPipeline shaders;
     public Prefs prefs;
+    private MusicEngine musicEngine;
+
+    public JamGame(MusicEngine musicEngine) {
+        this.musicEngine = musicEngine;
+    }
 
     @Override
     public void create() {
@@ -41,6 +49,8 @@ public class JamGame extends Game {
         
         screens = new ScreenManager(this);
         screens.push(new SplashScreen());
+
+        musicEngine.init();
     }
 
     @Override
@@ -65,6 +75,24 @@ public class JamGame extends Game {
             shaders.end();
             shaders.render();
         }
+
+        // --- Music Test Hook ---
+        if (musicEngine != null) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+                musicEngine.play(MusicPatterns.MENU_MUSIC);
+                Gdx.app.debug("Music", "Playing Menu Music");
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+                musicEngine.play(MusicPatterns.COMBAT_MUSIC);
+                Gdx.app.debug("Music", "Playing Combat Music");
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+                musicEngine.play(MusicPatterns.VICTORY_MUSIC);
+                Gdx.app.debug("Music", "Playing Victory Music");
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_0)) {
+                musicEngine.stop();
+                Gdx.app.debug("Music", "Stopping Music");
+            }
+        }
+        // --- End Music Test Hook ---
     }
 
     @Override
@@ -79,5 +107,6 @@ public class JamGame extends Game {
         if (screens != null) screens.dispose();
         if (shaders != null) shaders.dispose();
         if (assets != null) assets.dispose();
+        if (musicEngine != null) musicEngine.dispose();
     }
 }
