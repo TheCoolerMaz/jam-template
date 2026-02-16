@@ -7,5 +7,6 @@ import jsinterop.annotations.JsType;
 public class Strudel {
     public static native void evaluate(String code);
     public static native void hush();
+    public static native void setVolume(float volume);
     public static native void setParam(String name, float value);
 }

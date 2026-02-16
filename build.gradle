@@ -6,7 +6,8 @@ buildscript {
         gradlePluginPortal() // Use the official plugin portal
     }
     dependencies {
-        classpath "org.docstr.gwt:org.docstr.gwt.gradle.plugin:1.1.31" // Correct plugin artifact and potentially compatible version
+        classpath "org.docstr.gwt:org.docstr.gwt.gradle.plugin:1.1.31"
+        classpath "org.gretty:gretty:3.1.0"
     }
 }
 
@@ -85,12 +86,20 @@ project(':html') {
     apply plugin: 'java'
     apply plugin: 'war'
     apply plugin: 'org.docstr.gwt'
+    apply plugin: 'org.gretty'
 
     gwt {
         gwtVersion = '2.10.0'
         modules 'com.jamtemplate.gwt.GwtDefinition'
         minHeapSize = '512M'
         maxHeapSize = '2G'
+    }
+
+    gretty {
+        contextPath = '/'
+        extraResourceBase 'src/main/webapp'
+        extraResourceBase 'war'
+        extraResourceBase 'build/gwt/out'
     }
 
     java {

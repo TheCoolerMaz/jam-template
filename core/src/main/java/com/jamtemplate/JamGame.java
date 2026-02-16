@@ -62,6 +62,7 @@ public class JamGame extends Game {
 
         if (musicEngine != null) {
             musicEngine.init();
+            musicEngine.setVolume(prefs.getMasterVolume() * prefs.getMusicVolume());
         }
     }
 
@@ -120,5 +121,9 @@ public class JamGame extends Game {
         if (shaders != null) shaders.dispose();
         if (assets != null) assets.dispose();
         if (musicEngine != null) musicEngine.dispose();
+    }
+
+    public MusicEngine getMusicEngine() {
+        return musicEngine;
     }
 }

@@ -30,6 +30,13 @@ public class GwtMusicEngine implements MusicEngine {
     }
 
     @Override
+    public void setVolume(float volume) {
+        if (Gdx.app.getType() == Application.ApplicationType.WebGL) {
+            Strudel.setVolume(volume);
+        }
+    }
+
+    @Override
     public void setParameter(String name, float value) {
         if (Gdx.app.getType() == Application.ApplicationType.WebGL) {
             Strudel.setParam(name, value);

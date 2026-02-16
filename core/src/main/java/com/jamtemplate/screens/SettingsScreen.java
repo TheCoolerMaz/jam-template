@@ -103,12 +103,6 @@ public class SettingsScreen extends GameScreen {
         root.add(new Label("Master", skin)).left().padRight(20);
         final Slider masterSlider = new Slider(0f, 1f, 0.1f, false, skin);
         masterSlider.setValue(prefs.getMasterVolume());
-        masterSlider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                prefs.setMasterVolume(masterSlider.getValue());
-            }
-        });
         root.add(masterSlider).width(200);
         root.row().padTop(10);
         
@@ -116,14 +110,25 @@ public class SettingsScreen extends GameScreen {
         root.add(new Label("Music", skin)).left().padRight(20);
         final Slider musicSlider = new Slider(0f, 1f, 0.1f, false, skin);
         musicSlider.setValue(prefs.getMusicVolume());
-        musicSlider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                prefs.setMusicVolume(musicSlider.getValue());
-            }
-        });
         root.add(musicSlider).width(200);
         root.row().padTop(10);
+        
+        // Wire up master and music sliders to update effective volume
+        ChangeListener volumeListener = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                float master = masterSlider.getValue();
+                float music = musicSlider.getValue();
+                prefs.setMasterVolume(master);
+                prefs.setMusicVolume(music);
+                float effectiveVolume = master * music;
+                if (JamGame.INSTANCE.getMusicEngine() != null) {
+                    JamGame.INSTANCE.getMusicEngine().setVolume(effectiveVolume);
+                }
+            }
+        };
+        masterSlider.addListener(volumeListener);
+        musicSlider.addListener(volumeListener);
         
         // SFX Volume
         root.add(new Label("SFX", skin)).left().padRight(20);
